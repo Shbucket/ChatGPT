@@ -22,4 +22,4 @@ export const api = createApi({
 }),
 });
 
-export const { usePostAiTextMutation,usePostAiCodeMutation } = api;
+export const { usePostAiTextMutation, usePostAiCodeMutation } = api;

@@ -1,10 +1,9 @@
-import React from "react";
 import {
-  XMarkIcon,
-  PaperClipIcon,
   PaperAirplaneIcon,
+  PaperClipIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 
 const MessageFormUI = ({
@@ -12,6 +11,8 @@ const MessageFormUI = ({
   message,
   handleChange,
   handleSubmit,
+  appendText,
+  handleKeyDown,
 }) => {
   const [preview, setPreview] = useState("");
 
@@ -41,8 +42,17 @@ const MessageFormUI = ({
             type="text"
             value={message}
             onChange={handleChange}
-            placeholder="Send a Message..."
+            onKeyDown={handleKeyDown}
+            placeholder="Send a message..."
           />
+          {appendText && (
+            <input
+              className="message-form-assist"
+              type="text"
+              disabled="disabled"
+              value={`${message} ${appendText}`}
+            />
+          )}
         </div>
         <div className="message-form-icons">
           <Dropzone
@@ -55,8 +65,8 @@ const MessageFormUI = ({
             }}
           >
             {({ getRootProps, getInputProps, open }) => (
-              <div {...getRootProps}>
-                <input {...getInputProps} />
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
                 <PaperClipIcon
                   className="message-form-icon-clip"
                   onClick={open}
@@ -78,4 +88,5 @@ const MessageFormUI = ({
     </div>
   );
 };
- export default MessageFormUI;
+
+export default MessageFormUI;

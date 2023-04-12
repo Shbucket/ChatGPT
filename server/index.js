@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 app.use(express.json);
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policv: "cross-origin" }));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -24,11 +24,6 @@ const configuration = new Configuration({
 });
 export const openai = new OpenAIApi(configuration);
 
-const completion = await openai.createCompletion({
-  model: "text-davinci-003",
-  prompt: "Hello world",
-});
-console.log(completion.data.choices[0].text);
 
 /* ROUTES */
 app.use("/openai", openAiRoutes);
