@@ -7,19 +7,46 @@ export const api = createApi({
   endpoints: (build) => ({
     postAiText: build.mutation({
       query: (payload) => ({
-        url: 'openai/text',
-        method: 'POST',
+        url: "openai/text",
+        method: "POST",
         body: payload,
       }),
-      postAiCode: build.mutation({
+    }),
+    postAiCode: build.mutation({
       query: (payload) => ({
-        url: 'openai/code',
-        method: 'POST',
+        url: "openai/code",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    postAiAssist: build.mutation({
+      query: (payload) => ({
+        url: "openai/assist",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    postLogin: build.mutation({
+      query: (payload) => ({
+        url: "auth/login",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    postSignUp: build.mutation({
+      query: (payload) => ({
+        url: "auth/signup",
+        method: "POST",
         body: payload,
       }),
     }),
   }),
-}),
 });
 
-export const { usePostAiTextMutation, usePostAiCodeMutation } = api;
+export const {
+  usePostAiTextMutation,
+  usePostAiCodeMutation,
+  usePostAiAssistMutation,
+  usePostLoginMutation,
+  usePostSignUpMutation,
+} = api;
