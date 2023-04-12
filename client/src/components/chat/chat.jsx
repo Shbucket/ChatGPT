@@ -4,9 +4,10 @@ import {
   MultiChatSocket,
   MultiChatWindow,
 } from "react-chat-engine-advanced";
-
+import Ai from "@/components/customMessageForms/Ai"
 import CustomerHeader from "@/components/customHeader";
 import StandardMessageForm from "@/components/customMessageForms/StandardMessageForm";
+import AiCode from "@/components/customMessageForms/AiCode";
 const Chat = () => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
@@ -21,6 +22,13 @@ const Chat = () => {
         style={{ height: "100vh" }}
         renderChatHeader={(chat) => <CustomerHeader chat={chat} />}
         renderMessageForm={(props) => {
+          if(chatProps.chat?.title.startsWith("AiChat_")){
+
+            return <Ai props={props} activeChat={chatProps.chat} />;
+          }
+             if (chatProps.chat?.title.startsWith("AiCode_")) {
+               return <AiCode props={props} activeChat={chatProps.chat} />;
+             }
           return (
             <StandardMessageForm props={props} activeChat={chatProps.chat} />
           );
